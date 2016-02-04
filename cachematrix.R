@@ -29,7 +29,8 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Return the inverse if it exists or compute it and cache it if not
+## Return the inverse of a matrix if it exists
+## Compute it and cache it if it doesn't, and then return it
 cacheSolve <- function(x, ...) {
     ## Return a matrix that is the inverse of 'x'
     
@@ -39,11 +40,8 @@ cacheSolve <- function(x, ...) {
     }
     
     m <- x$get()
-    identityDim <- prod(dim(m))
-    identity <-
-        matrix(rep.int(1, times = identityDim), nrow = nrow(m), ncol = ncol(m))
     
-    inverse <- solve(m)
+    inverse <- solve(m, ...)
     x$setInverse(inverse)
     inverse
 }
